@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <div v-for="(dish, index) in dishes" :key="index" class="product">
+            <h1>{{dish.name}}</h1>
+            <h2 class="price">
+                {{dish.price}}
+            </h2>
+            <div class="quantity">
+                <button @click="setQuantity(dish, -1)">-</button>
+                        {{dish.quantity}}
+                <button @click="setQuantity(dish, 1)">+</button>
+            </div>
+            <button @click="setPushCart(dish, dish.quantity)">aggiungi al carrello</button>
+        </div>
+
+        <div v-for="item in cart" :key="item.id">
+            {{ item.name }}
+            {{ item.price }}
+            {{ item.quantity }}
+            {{ item.price * item.quantity }}
+        </div>
+
+        <button @click="setCompra">Acquista</button>
+        <button @click="setTest">test</button>
+    </div>
+    
+</body>
+
+<script src="https://unpkg.com/vue@3"></script>
+
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                // quantity: 0,
+                cart : [],
+                dishes : [
+                        {
+                            name: "margherita",
+                            price: 6,
+                            quantity: 0,
+                        },
+                        {
+                            name: "diavola",
+                            price: 12,
+                            quantity: 0,
+                        },
+                        {
+                            name: "capricciosa",
+                            price: 8,
+                            quantity: 0,
+                        },
+                    ]
+            }
+        },
+        methods: {
+            // setCounter(){
+            //     this.counter = 
+            // },
+            setQuantity(dish, numero) {
+                dish.quantity = dish.quantity + numero;
+            },
+            setDish(name, price) {
+                this.dish.name = name;
+                this.dish.price = price;
+                // this.dish.quantity = quantity;
+            },
+            setPushCart(dish, quantity){
+                dish.quantity = quantity;
+                this.cart.push(dish);
+            },
+            setCompra(){
+                window.localStorage.setItem('cartItem', JSON.stringify(this.cart));
+                console.log(localStorage.getItem('cartItem'));
+            },
+            setTest(){
+                console.log(localStorage.getItem('cartItem'));
+            }
+
+        },
+    }).mount('#app')
+</script>
+
+</html>
