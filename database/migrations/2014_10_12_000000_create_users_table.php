@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->time('opening_time')->nullable();
             $table->time('closing_time')->nullable();
             $table->string('closing_days')->nullable();
+            $table->boolean('open');
             $table->rememberToken();
             $table->timestamps();
         });

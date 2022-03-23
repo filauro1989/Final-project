@@ -27,6 +27,7 @@ class User extends Authenticatable
         'opening_time',
         'closing_time',
         'closing_days',
+        'open',
     ];
 
     public function orders() {

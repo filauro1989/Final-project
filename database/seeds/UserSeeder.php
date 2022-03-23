@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
         $newUser->opening_time = '08:00';
         $newUser->closing_time = '23:30';
         $newUser->closing_days = 'Saturday';
+        $newUser->open = 1;
 
         $newUser->save();
     }

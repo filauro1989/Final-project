@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Course;
 
 class CourseSeeder extends Seeder
 {
@@ -11,6 +12,8 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $newCourse = new Course();
+        $newCourse->name = 'pizza';
+        $newCourse->save();
     }
 }

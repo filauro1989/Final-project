@@ -22,9 +22,18 @@ class CreateOrdersTable extends Migration
                 ->references('id')
                 // DELLA TABELLA USERS
                 ->on('users')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('cart_id')->nullable();
+            // CHIAVE ESTERNA
+            $table->foreign('cart_id')
+                // DELLA COLONNA ID
+                ->references('id')
+                // DELLA TABELLA USERS
+                ->on('carts');
+            
             $table->dateTime('date');
-            $table->string('email');
-            $table->string('address');
+            $table->string('customer_email');
+            $table->string('delivery_address');
             $table->string('payment_method');
             $table->float('total_amount', 7, 2);
             $table->timestamps();

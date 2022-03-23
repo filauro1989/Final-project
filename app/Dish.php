@@ -16,9 +16,9 @@ class Dish extends Model
         'visible',
     ];
 
-    public function orders() {
-        return $this->belongsToMany('App\Order');
-    }
+    // public function orders() {
+    //     return $this->belongsToMany('App\Order');
+    // }
 
     public function course() {
         return $this->belongsTo('App\Course');

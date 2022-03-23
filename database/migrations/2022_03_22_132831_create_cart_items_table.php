@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDishesTable extends Migration
+class CreateCartItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,30 +13,24 @@ class CreateDishesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dishes', function (Blueprint $table) {
+        Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('dish_id')->nullable();
             // CHIAVE ESTERNA
-            $table->foreign('user_id')
+            $table->foreign('dish_id')
                 // DELLA COLONNA ID
                 ->references('id')
                 // DELLA TABELLA USERS
-                ->on('users')->onDelete('cascade');
-
-            $table->unsignedBigInteger('course_id')->nullable();
+                ->on('dishes')->onDelete('cascade');
+            $table->unsignedBigInteger('cart_id')->nullable();
             // CHIAVE ESTERNA
-            $table->foreign('course_id')
+            $table->foreign('cart_id')
                 // DELLA COLONNA ID
                 ->references('id')
                 // DELLA TABELLA USERS
-                ->on('courses');
-
-            $table->string('name');
-            $table->string('description');
-            $table->float('price', 6, 2);
-            $table->string('image')->nullable();
-            $table->boolean('visible');
+                ->on('carts')->onDelete('set null');
+            $table->smallInteger('quantity')->unsigned();
+            $table->float('price_historic', 6, 2,);
             $table->timestamps();
         });
     }
@@ -48,6 +42,6 @@ class CreateDishesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dishes');
+        Schema::dropIfExists('cart_items');
     }
 }
